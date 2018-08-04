@@ -6,9 +6,19 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "connect-flash": "*",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "morgan": "~1.9.0"
+    "express-messages": "*",
+    "express-session": "^1.15.6",
+    "express-validator": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "~1.9.0",
+    "multer": "*",
+    "passport": "*",
+    "passport-http": "*",
+    "passport-local": "*"
   }
 }
