@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+<!-- Navbar -->
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">My Music</a>
@@ -23,7 +23,7 @@
                     <a href="/" class="nav-link">Home</a>
                 </li>
                 <li>
-                    <a href="/users/signin" class="nav-link">Sign in</a>
+                    <a href="/users/signin" class="nav-link active">Sign in</a>
                 </li>
                 <li>
                     <a href="/users/signup" class="nav-link">Sign up</a>
@@ -41,7 +41,21 @@
     </div>
 </nav>
 
-<h1>My music</h1>
+<!-- Content -->
+<div class="container">
+    <h1>Login</h1>
+    <p>Please login using your account below</p>
+    <form method="post" action="/users/signin" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input class="form-control" type="text" id="usernameInput" placeholder="Enter username">
+            <label for="passwordInput">Password</label>
+            <input class="form-control" type="password" id="passwordInput" placeholder="Enter password">
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

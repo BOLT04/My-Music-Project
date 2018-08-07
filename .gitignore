@@ -3,6 +3,9 @@ logs
 *.log
 npm-debug.log*
 
+# Web storm IDE
+.idea/
+
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 

@@ -26,7 +26,7 @@
                     <a href="/users/signin" class="nav-link">Sign in</a>
                 </li>
                 <li>
-                    <a href="/users/signup" class="nav-link">Sign up</a>
+                    <a href="/users/signup" class="nav-link active">Sign up</a>
                 </li>
                 <li>
                     <a href="/users/playlist" class="nav-link">My playlists</a>
@@ -41,7 +41,27 @@
     </div>
 </nav>
 
-<h1>My music</h1>
+<div class="container">
+    <h1>Register your account</h1>
+    <form method="post" action="/users/signin" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input class="form-control" type="text" id="nameInput" placeholder="Enter name">
+            <label for="emailInput">Email</label>
+            <input class="form-control" type="email" id="emailInput" placeholder="Enter email">
+            <label for="usernameInput">Username</label>
+            <input class="form-control" type="text" id="usernameInput" placeholder="Enter username">
+            <label for="passwordInput">Password</label>
+            <input class="form-control" type="password" id="passwordInput" placeholder="Enter password">
+            <label for="passwordConfirmInput">Confirm Password</label>
+            <input class="form-control" type="password" id="passwordConfirmInput" placeholder="Confirm password">
+            <label for="profileImgInput">Profile Image</label>
+            <input class="form-control" type="file" id="profileImgInput">
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+</div>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -48,7 +48,7 @@ app.use(passport.session());
 app.use(flash());
 app.use((req, res) => {
     res.locals.messages = require('express-messages');
-    next();
+    //next();
 });
 
 
