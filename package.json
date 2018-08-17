@@ -6,6 +6,8 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcryptjs": "*",
+    "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
@@ -13,6 +15,8 @@
     "express-messages": "*",
     "express-session": "^1.15.6",
     "express-validator": "*",
+    "jquery": "^3.3.1",
+    "jsdom": "^11.12.0",
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "~1.9.0",
