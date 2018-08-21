@@ -33,13 +33,6 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configure routing.
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// Handle file uploads.
-//app.use(multer({dest: './uploads'})); ??????????????????????
-
 // Handle Sessions.
 app.use(session({
     secret: 'secret',
@@ -50,6 +43,13 @@ app.use(session({
 // Authentication system
 app.use(passport.initialize()); // why doesn't passport.Passport.initialize() work since intelissense is saying the way it currently is shows 'unresolved'????!!
 app.use(passport.session());
+
+app.use(flash());
+
+// Handle file uploads.
+//app.use(multer({dest: './uploads'})); ??????????????????????
+
+
 
 // Validator???????????????????
 app.use(expressValidator());
@@ -69,7 +69,11 @@ app.use(expressValidator());
     }
 }));
 */
-app.use(flash());
+
+// Configure routing.
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
 app.use((req, res) => {
     res.locals.messages = require('express-messages');
     //next();

@@ -2,6 +2,8 @@ let express = require("express");
 let multer = require("multer");
 const html = require("../htmlGenerator/html");
 
+let User = require('../models/user');
+
 //var jsdom = require('jsdom');
 //const { JSDOM } = jsdom;
 
@@ -22,6 +24,15 @@ router.get("/", (req, res) => {
 	res.send("respond with a resource");//TODO: this
 });
 
+router.get("/oi", (req, res) => {
+    req.flash('succes', 'Logged in sir!');
+    res.redirect("/");
+});
+
+router.get("/teste", (req, res) => {
+    res.render('index', {messages: req.flash('succes')})
+});
+
 /* Register a new account/user. */
 router.get("/signup", (req, res) => {
     res.render('signup', {title: 'Signup'});
@@ -29,11 +40,6 @@ router.get("/signup", (req, res) => {
 });
 
 const { check, validationResult } = require("express-validator/check");
-
-function passwordValidator(value, {req}) {
-	if (value !== req.body.password)
-		throw new Error("Password confirmation does not match password");
-}
 
 //TODO: Clean this code. Too many arguments and its ugly!
 // TODO: actually that might not be possible since its middleware
@@ -44,29 +50,34 @@ router.post("/signup", [
 	check("email", "Email is required").isLength({ min: 1 }),
 	check("email", "Email is not valid").isEmail(),
 	check("username", "Username field is required").isLength({ min: 1 }),
-	check("password", "Password is required with the minimum length of 5.").isLength({ min: 1 }),
-	check("password").isLength({ min: 5 }),
-	check("passwordConfirm", "Passwords do not match").custom(passwordValidator)
+	check("password", "Password is required with the minimum length of 5.").isLength({ min: 5 }),
+	check("passwordConfirm", "Passwords do not match").custom((value, { req }) => value === req.body.password)
 ], upload.single("profileImg"), (req, res) => {
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
 		res.render('signup', {errors: errors.array()})
-		//signupHtml(errors.array());
-		//res.sendFile(path.join(__dirname + '/signup.html'));
 		//res.send(signupHtml(errors.array()));
-		//res.send(errors.array());
-
 	} else {
+		let newUser = new User({
+			name: req.body.name,
+			email: req.body.email,
+			username: req.body.username,
+            password: req.body.password,
+			profileImg: req.body.profileImg
+		});
 
-		console.log("working!!!!");
+		User.createUser(newUser, (error, user) => {
+			if (error) throw error;
+
+            console.log(user);
+		});
+
+		req.flash('successLoginMsg', 'You successfully registered.');
+
+		res.location('/');
+		res.redirect('/');
 	}
-
-	var name = req.body.name;
-	var email = req.body.email;
-	var username = req.body.username;
-	var password = req.body.password;
-	var passwordConfirm = req.body.passwordConfirm;
 
 	if (req.file) {
 		console.log("Uploading file...");

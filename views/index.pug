@@ -1,4 +1,7 @@
 extends layout
 
 block content
+    if successLoginMsg.length > 0
+        .alert.alert-success(role="alert")
+            != successLoginMsg
     h1= title
