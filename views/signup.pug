@@ -1,0 +1,20 @@
+extends layout
+
+block content
+    h1= "Register your account"
+    form(id="signupForm" method="post" action="/users/signup")
+        .form-group
+            label(for="nameInput") Name
+            input.form-control(type="text" name="name" id="nameInput" placeholder="Enter name")
+            label(for="emailInput") Email
+            input.form-control(type="email" name="email" id="emailInput" placeholder="Enter email")
+            label(for="usernameInput") Username
+            input.form-control(type="text" name="username" id="usernameInput" placeholder="Enter username")
+            label(for="passwordInput") Password
+            input.form-control(type="password" name="password" id="passwordInput" placeholder="Enter password")
+            label(for="passwordConfirmInput") Confirm Password
+            input.form-control(type="password" name="passwordConfirm" id="passwordConfirmInput" placeholder="Confirm password")
+            label(for="profileImgInput") Profile Image
+            input.form-control(type="file" name="profileImg" id="profileImgInput")
+
+        button.btn.btn-primary(id="submitBtn" type="submit") Submit
