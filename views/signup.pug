@@ -2,6 +2,10 @@ extends layout
 
 block content
     h1= "Register your account"
+    ul.errors
+        if errors
+            each error, i in errors
+                li.alert.alert-danger #{error.msg}
     form(id="signupForm" method="post" action="/users/signup")
         .form-group
             label(for="nameInput") Name

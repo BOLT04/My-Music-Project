@@ -8,25 +8,25 @@ body
     nav(class='navbar navbar-expand-md navbar-light bg-light')
         .container
             .navbar-header
-                a.navbar-brand(href='#') title
+                a.navbar-brand(href='#') My Music
                 button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
                     span.navbar-toggler-icon
             .collapse.navbar-collapse(id="navbarSupportedContent")
                 ul.nav.navbar-nav
                     li
-                        a.nav-link.active(href="/") Home
+                        a(class="nav-link" + (title == 'My Music' ? ' active' : '') href="/") Home
                     li
-                        a.nav-link(href="/users/signin") Sign in
+                        a(class="nav-link" + (title == 'Signin' ? ' active' : '') href="/users/signin") Sign in
                     li
-                        a.nav-link(href="/users/signup") Sign up
+                        a(class="nav-link" + (title == 'Signup' ? ' active' : '') href="/users/signup") Sign up
                     li
-                        a.nav-link(href="/users/playlist") My playlists
+                        a(class="nav-link" + (title == 'Playlists' ? ' active' : '') href="/users/playlist") My playlists
                 ul.nav.navbar-nav.ml-auto
                     li
                         a.nav-link(href="/users/logout") Logout
-        .container
-            block content
+    .container
+        block content
     script(src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous")

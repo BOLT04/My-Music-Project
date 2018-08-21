@@ -35,13 +35,27 @@ function createElement(name, attributes, content) {
     return new HtmlElement(name, attributes, content);
 }
 
+function ulWithAttrs() {
+
+}
+
+function ulWith() {
+
+}
+
+function ul(attributes, content) {
+    var arg = {};
+    if (attributes && content)
+        arg = attributes;
+    return createElement('ul', arg, content).toHtml();
+}
+
 module.exports = {
-    ul: function (content) {
+    ul: function (attributes = {}, content) {
         let toHtml = createElement('ul', {}, content).toHtml();
         console.log(toHtml);
         return toHtml;
     },
-
     li: function (attributes, content) {
         let toHtml = createElement('li', attributes, content).toHtml();
         console.log(toHtml);

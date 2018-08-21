@@ -19,16 +19,13 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get("/", (req, res) => {
-	res.send("respond with a resource");
-});
-
-router.get("/error", (req, res) => {
-	res.send({errors: 8});
+	res.send("respond with a resource");//TODO: this
 });
 
 /* Register a new account/user. */
 router.get("/signup", (req, res) => {
-	renderHtmlFromFile("signup", res);
+    res.render('signup', {title: 'Signup'});
+	//renderHtmlFromFile("signup", res);
 });
 
 const { check, validationResult } = require("express-validator/check");
@@ -39,6 +36,7 @@ function passwordValidator(value, {req}) {
 }
 
 //TODO: Clean this code. Too many arguments and its ugly!
+// TODO: actually that might not be possible since its middleware
 /* Create a new account/user. */
 router.post("/signup", [
 	// Input Validation.
@@ -53,10 +51,11 @@ router.post("/signup", [
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
+		res.render('signup', {errors: errors.array()})
 		//signupHtml(errors.array());
 		//res.sendFile(path.join(__dirname + '/signup.html'));
-		res.send(signupHtml(errors.array()));
-		//res.json({ errors: errors.array() });
+		//res.send(signupHtml(errors.array()));
+		//res.send(errors.array());
 
 	} else {
 
@@ -177,7 +176,8 @@ function htmlErrorList(errors) {
 
 /* Login with an existing account. */
 router.get("/signin", (req, res) => {
-	renderHtmlFromFile("signin", res);
+    res.render('signin', {title: 'Signin'});
+    //renderHtmlFromFile("signin", res);
 });
 
 

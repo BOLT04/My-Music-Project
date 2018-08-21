@@ -23,6 +23,7 @@
     "multer": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "pug": "^2.0.3"
   }
 }
