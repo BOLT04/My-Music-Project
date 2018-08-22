@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let bcrypt = require('bcryptjs');
 
 mongoose.connect("mongodb://localhost:27017/my_musicDB", { useNewUrlParser: true });
 
@@ -30,11 +31,17 @@ let userShema = mongoose.Schema({
 
 module.exports = mongoose.model('User', userShema);
 
+const saltRounds = 10;
 /**
  * Creates a user on the Database.
  * @param newUser to be created on the database.
  * @param cb the callback.
  */
 module.exports.createUser = (newUser, cb) => {
-    newUser.save(cb);
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+            newUser.password = hash;
+            newUser.save(cb);
+        });
+    });
 };

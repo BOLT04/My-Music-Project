@@ -6,7 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
-    "bcryptjs": "*",
+    "bcryptjs": "^2.4.3",
     "body-parser": "*",
     "connect-flash": "*",
     "cookie-parser": "~1.4.3",

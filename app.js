@@ -11,6 +11,7 @@ var multer = require('multer'); // Handles files from forms
 var flash = require('connect-flash');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
