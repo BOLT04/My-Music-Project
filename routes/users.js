@@ -56,14 +56,14 @@ router.post("/signup", [
 			name: req.body.name,
 			email: req.body.email,
 			username: req.body.username,
-            password: req.body.password,
+            		password: req.body.password,
 			profileImg: req.body.profileImg
 		});
 
 		User.createUser(newUser, (error, user) => {
 			if (error) throw error;
 
-            console.log(user);
+            		console.log(user);
 		});
 
 		req.flash('successMsg', 'You successfully registered.');
@@ -72,9 +72,9 @@ router.post("/signup", [
 		res.redirect('/');
 	}
 
-	if (req.file) {
+	if (req.file) 
 		console.log("Uploading file...");
-	} else
+	else
 		console.log("No file uploaded.");
 });
 
