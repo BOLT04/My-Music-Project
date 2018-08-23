@@ -26,6 +26,12 @@ body
                     li
                         a.nav-link(href="/users/logout") Logout
     .container
+        if successMsg && successMsg.length > 0
+            .alert.alert-success(role="alert")
+                != successMsg
+        else if failureMsg && failureMsg.length > 0
+                .alert.alert-danger(role="alert")
+                    != failureMsg
         block content
 
     script(src="https://code.jquery.com/jquery-3.3.1.min.js"

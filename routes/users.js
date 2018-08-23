@@ -1,5 +1,7 @@
 let express = require("express");
 let multer = require("multer");
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 const html = require("../htmlGenerator/html");
 
 let User = require('../models/user');
@@ -22,15 +24,6 @@ var router = express.Router();
 /* GET users listing. */
 router.get("/", (req, res) => {
 	res.send("respond with a resource");//TODO: this
-});
-
-router.get("/oi", (req, res) => {
-    req.flash('succes', 'Logged in sir!');
-    res.redirect("/");
-});
-
-router.get("/teste", (req, res) => {
-    res.render('index', {messages: req.flash('succes')})
 });
 
 /* Register a new account/user. */
@@ -73,7 +66,7 @@ router.post("/signup", [
             console.log(user);
 		});
 
-		req.flash('successLoginMsg', 'You successfully registered.');
+		req.flash('successMsg', 'You successfully registered.');
 
 		res.location('/');
 		res.redirect('/');
@@ -186,11 +179,46 @@ function htmlErrorList(errors) {
 
 
 /* Login with an existing account. */
+
 router.get("/signin", (req, res) => {
-    res.render('signin', {title: 'Signin'});
+	// the error type flash message is defined if passport.authenticate fails.
+    res.render('signin', {title: 'Signin', successMsg: req.flash('successMsg'), failureMsg: req.flash('error')});
     //renderHtmlFromFile("signin", res);
 });
 
+passport.use(new LocalStrategy((username, password, done) => {
+    User.getUserByUsername(username, (err, user) => {
+        if (err) throw err;
+        if (!user)
+            return done(null, false, { message: 'Unknown User' });
+
+        User.comparePassword(password, user.password, (err, isMatch) => {
+            if (err) throw err;
+            if (!isMatch)
+                return done(null, false, { message: 'Invalid password' });
+            else
+                return done(null, user);
+        });
+    });
+}));
+
+passport.serializeUser((user, done) =>
+    done(null, user.id)
+);
+
+passport.deserializeUser((id, done) =>
+    User.getUserById(id, (err, user) => done(err, user))
+);
+
+router.post("/signin",
+    passport.authenticate('local', {failureRedirect: '/users/signin', failureFlash: 'Invalid username or password.' }),
+	(req, res) => {
+		// If this function gets called, authentication was successful.
+		// `req.user` contains the authenticated user.
+		//res.redirect('/users/' + req.user.username);
+		req.flash('successMsg', 'You are now logged in.');
+		res.redirect('/');
+});
 
 // Auxiliary functions
 function fileNameToFullPath(fileName) {

@@ -6,30 +6,45 @@ mongoose.connect("mongodb://localhost:27017/my_musicDB", { useNewUrlParser: true
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-    // we're connected!
+    console.log('connected to database.');
+
+
 });
+
 // User Schema.
-let userShema = mongoose.Schema({
+let userSchema = mongoose.Schema({
     username: {
         type: String,
         index: true
     },
-    password: {
-        type: String
-    },
-    email: {
-        type: String
-    },
-    name: {
-        type: String
-    },
-    profileImg: {
-        type: String
-    },
-
+    password: String,
+    email: String,
+    name: String,
+    profileImg: String
 });
 
-module.exports = mongoose.model('User', userShema);
+let User = module.exports = mongoose.model('User', userSchema);
+
+module.exports.getUserById = (id, cb) => {
+    User.findById(id, cb);
+};
+
+module.exports.getUserByUsername = (username, cb) => {
+    let query = {username: username};
+    User.findOne(query, cb);
+};
+
+/**
+ * Compares the password given with the hashed password on the DB.
+ * @param candidatePass password the user types in on the login form.
+ * @param hash hashed password inside the DB.
+ * @param cb callback.
+ */
+module.exports.comparePassword = (candidatePass, hash, cb) => {
+    bcrypt.compare(candidatePass, hash, (err, isMatch) => {
+        cb(null, isMatch);
+    });
+};
 
 const saltRounds = 10;
 /**
@@ -38,7 +53,7 @@ const saltRounds = 10;
  * @param cb the callback.
  */
 module.exports.createUser = (newUser, cb) => {
-    bcrypt.genSalt(saltRounds, (err, salt) => {
+    bcrypt.genSalt(saltRounds, (err, salt) => {//TODO: Should these two error variables have the same name????!!!
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             newUser.password = hash;
             newUser.save(cb);
