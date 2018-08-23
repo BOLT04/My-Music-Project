@@ -16,15 +16,18 @@ body
                 ul.nav.navbar-nav
                     li
                         a(class="nav-link" + (title == 'My Music' ? ' active' : '') href="/") Home
-                    li
-                        a(class="nav-link" + (title == 'Signin' ? ' active' : '') href="/users/signin") Sign in
-                    li
-                        a(class="nav-link" + (title == 'Signup' ? ' active' : '') href="/users/signup") Sign up
-                    li
-                        a(class="nav-link" + (title == 'Playlists' ? ' active' : '') href="/users/playlist") My playlists
-                ul.nav.navbar-nav.ml-auto
-                    li
-                        a.nav-link(href="/users/logout") Logout
+                    if !user
+                        li
+                            a(class="nav-link" + (title == 'Signin' ? ' active' : '') href="/users/signin") Sign in
+                        li
+                            a(class="nav-link" + (title == 'Signup' ? ' active' : '') href="/users/signup") Sign up
+                    else
+                        li
+                            a(class="nav-link" + (title == 'Playlists' ? ' active' : '') href="/users/playlist") My playlists
+                if user
+                    ul.nav.navbar-nav.ml-auto
+                        li
+                            a.nav-link(href="/users/logout") Logout
     .container
         if successMsg && successMsg.length > 0
             .alert.alert-success(role="alert")

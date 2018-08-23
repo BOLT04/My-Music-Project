@@ -220,7 +220,28 @@ router.post("/signin",
 		res.redirect('/');
 });
 
+router.get('/playlist', ensureAuthenticated, (req, res) => {
+    res.send('todo...');
+});
+
+
+router.get('/logout', (req, res) => {
+    req.logout(); // remove req.user and clear the login session (function from passport)
+
+    req.flash('successMsg', 'You are logged out');
+
+    res.redirect('/users/signin');
+});
+
 // Auxiliary functions
+function ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    else
+        //req.flash('error','You are not logged in');
+        res.redirect('/users/login');
+}
+
 function fileNameToFullPath(fileName) {
 	return "./public/" +fileName+ ".html";
 }

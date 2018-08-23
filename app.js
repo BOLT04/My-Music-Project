@@ -72,8 +72,14 @@ app.use(expressValidator());
 */
 
 // Configure routing.
+app.use((req, res, next) => {
+    res.locals.user = req.user; // defining a local variable scoped to the request to access it on the templates/views.
+    next();
+});
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+
 
 app.use((req, res) => {
     res.locals.messages = require('express-messages');
