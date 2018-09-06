@@ -2,3 +2,10 @@ extends layout
 
 block content
     h1= title
+
+    form(method="get" action="/search")
+        .input-group.mb-3
+            .input-group-prepend
+                i.input-group-text.fa.fa-search(id="inputGroup-sizing-default")
+            input.form-control(name="searchBox" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+            placeholder="Search for artists/music")

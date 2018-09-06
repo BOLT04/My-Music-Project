@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    // Search Box
+    form(method="get" action="/search")
+        .search-box
+            input.search-txt(name="searchBox" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+            placeholder="Search for artists/music")
+            a.search-btn(href="#")
+                i.fas.fa-search
+
+    section(name='popularMusics')
+        .row
+            .col
+                .card(style="width: 180px; position:relative")
+                    img.card-img-top(src="https://i.scdn.co/image/5ce934f75355275073829d2abc541a5ba45c71c6" alt="Card image...")
+                    .card-body
+                        p(style="font: 14px 400; line-height: 20px; text-align: center") Drugs
+                        p(style="text-align: center; color: #999; font: Interstate") EDEN
+            .col
+                .card(style="width: 180px; position:relative")
+                    img.card-img-top(src="https://i.scdn.co/image/5ce934f75355275073829d2abc541a5ba45c71c6" alt="Card image...")
+                    .card-body
+                        p(style="font: 14px 400; line-height: 20px; text-align: center") Drugs
+                        p(style="text-align: center; color: #999; font: Interstate") EDEN
+            .col
+                .card(style="width: 180px; position:relative")
+                    img.card-img-top(src="https://i.scdn.co/image/5ce934f75355275073829d2abc541a5ba45c71c6" alt="Card image...")
+                    .card-body
+                        p(style="font: 14px 400; line-height: 20px; text-align: center") Drugs
+                        p(style="text-align: center; color: #999; font: Interstate") EDEN
+            .col
+                .card(style="width: 180px; position:relative")
+                    img.card-img-top(src="https://i.scdn.co/image/5ce934f75355275073829d2abc541a5ba45c71c6" alt="Card image...")
+                    .card-body
+                        p(style="font: 14px 400; line-height: 20px; text-align: center") Drugs
+                        p(style="text-align: center; color: #999; font: Interstate") EDEN

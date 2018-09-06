@@ -7,7 +7,7 @@ var session = require('express-session');
 var expressValidator = require('express-validator');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
-var multer = require('multer'); // Handles files from forms
+var multer = require('multer'); // Handles file uploads from forms
 var flash = require('connect-flash');
 var mongodb = require('mongodb');
 var mongoose = require('mongoose');
@@ -15,6 +15,7 @@ var bcrypt = require('bcryptjs');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var searchRouter = require('./routes/search');
 
 var app = express();
 var db = mongoose.connection;
@@ -47,29 +48,7 @@ app.use(passport.session());
 
 app.use(flash());
 
-// Handle file uploads.
-//app.use(multer({dest: './uploads'})); ??????????????????????
-
-
-
-// Validator???????????????????
 app.use(expressValidator());
-    /*errorFormatter: (param, msg, value) => {
-        var namespace = param.split('.')
-            , root    = namespace.shift()
-            , formParam = root;
-
-        while (namespace.length)
-            formParam += '[' + namespace.shift() + ']';
-
-        return {
-            param : formParam,
-            msg   : msg,
-            value : value
-        };
-    }
-}));
-*/
 
 // Configure routing.
 app.use((req, res, next) => {
@@ -78,8 +57,7 @@ app.use((req, res, next) => {
 });
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
-
+app.use('/search', searchRouter);
 
 app.use((req, res) => {
     res.locals.messages = require('express-messages');
