@@ -34,21 +34,33 @@ function buildAttributesHtml(attributes) {
 function createElement(name, attributes, content) {
     return new HtmlElement(name, attributes, content);
 }
-
-function ulWithAttrs() {
-
-}
-
-function ulWith() {
-
-}
-
-function ul(attributes, content) {
+//V1.0
+/*function ul(attributes, content) {
     var arg = {};
-    if (attributes && content)
+    if (attributes && content || typeof attributes === 'object')
         arg = attributes;
+    else
+        if (typeof attributes !== 'object')
+            content = attributes;
+
     return createElement('ul', arg, content).toHtml();
+}*/
+
+//V1.1
+function ul(attributes, content) {
+    if (typeof attributes !== 'object') {
+        content = attributes;
+        attributes = null // TODO: should this be {}????
+    }
+
+    return createElement('ul', attributes, content).toHtml();
 }
+
+console.log(ul({class: 'nav'}, "oi"))
+console.log(ul("oi"))
+console.log(ul({class: 'nav'}))
+console.log(ul({}))
+console.log(ul(1)) //TODO: should this work??? Or we only accept strings!?
 
 module.exports = {
     ul: function (attributes = {}, content) {

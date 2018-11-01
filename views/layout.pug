@@ -5,48 +5,55 @@ html
         link(rel='shortcut icon', type='image/x-icon' href='/images/music.ico')
         link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'
         integrity='sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO' crossorigin='anonymous')
+        link(rel='stylesheet', href='https://bootswatch.com/4/united/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous")
-body
-    // Navbar
-    nav(class='navbar navbar-expand-md navbar-light bg-light')
-        .container
-            .navbar-header
-                a.navbar-brand(href='#') My Music
-                button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
-                    span.navbar-toggler-icon
-            .collapse.navbar-collapse(id="navbarSupportedContent")
-                ul.nav.navbar-nav
-                    li
-                        a(class="nav-link" + (title == 'My Music' ? ' active' : '') href="/") Home
-                    if !user
-                        li
-                            a(class="nav-link" + (title == 'Signin' ? ' active' : '') href="/users/signin") Sign in
-                        li
-                            a(class="nav-link" + (title == 'Signup' ? ' active' : '') href="/users/signup") Sign up
-                    else
-                        li
-                            a(class="nav-link" + (title == 'Playlists' ? ' active' : '') href="/users/playlist") My playlists
-                if user
-                    ul.nav.navbar-nav.ml-auto
-                        li
-                            a.nav-link(href="/users/logout") Logout
-    .container
-        if successMsg && successMsg.length > 0
-            .alert.alert-success(role="alert")
-                != successMsg
-        else if failureMsg && failureMsg.length > 0
-                .alert.alert-danger(role="alert")
-                    != failureMsg
-        block content
+    body
+        // Navbar
+        nav(class='navbar navbar-expand-md navbar-dark bg-primary fixed-top')
+            .container
+                .navbar-header
+                    a.navbar-brand(href='#')
+                        img(src="/images/music-brand.ico")
+                        span My Music
+                    button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarTargetContent"
+                    aria-controls="navbarTargetContent" aria-expanded="false" aria-label="Toggle navigation")
+                        span.navbar-toggler-icon
+                .collapse.navbar-collapse(id="navbarTargetContent")
+                    ul.navbar-nav
+                        li.nav-item
+                            a(class="nav-link" + (title == 'My Music' ? ' active' : '') href="/") Home
+                        if !user
+                            li.nav-item
+                                a(class="nav-link" + (title == 'Signin' ? ' active' : '') href="/users/signin") Sign in
+                            li.nav-item
+                                a(class="nav-link" + (title == 'Signup' ? ' active' : '') href="/users/signup") Sign up
+                        else
+                            li.nav-item
+                                a(class="nav-link" + (title == 'Playlists' ? ' active' : '') href="/users/playlist") My playlists
+                    if user
+                        ul.nav.navbar-nav.ml-auto
+                            li.nav-item.dropdown
+                                a.nav-link.dropdown-toggle(data-toggle="dropdown" data-target="#profileDropdown") Profile
 
-    script(src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous")
-    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous")
+                                .dropdown-menu(id="profileDropdown")
+                                    a.dropdown-item(href="/users/account") Account
+                                    a.dropdown-item(href="/users/logout" style="color: light-grey") Log out
+        .container
+            if successMsg && successMsg.length > 0
+                .alert.alert-success(role="alert")
+                    != successMsg
+            else if failureMsg && failureMsg.length > 0
+                    .alert.alert-danger(role="alert")
+                        != failureMsg
+            block content
+
+        script(src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous")
+        script(src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous")
+        script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous")
