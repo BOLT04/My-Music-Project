@@ -26,6 +26,6 @@
     "passport-http": "*",
     "passport-local": "*",
     "pug": "^3.0.1",
-    "mpath": ">=0.5.1"
+    "mpath": ">=0.8.4"
   }
 }
