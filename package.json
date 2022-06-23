@@ -17,7 +17,7 @@
     "express-session": "^1.15.6",
     "express-validator": "*",
     "jquery": "^3.5.0",
-    "jsdom": "^11.12.0",
+    "jsdom": "^16.5.0",
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "~1.9.1",
